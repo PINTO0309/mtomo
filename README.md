@@ -28,13 +28,26 @@
 21. OpenCV 4.5.2-openvino
 
 ## 3. Usage
-### 3-1. Docker Build
+### 3-1. Docker Hub
+```
+$ xhost +local: && \
+  docker run -it --rm \
+  --gpus all \
+  -v `pwd`:/home/user/workdir \
+  -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+  --device /dev/video0:/dev/video0:mwr \
+  -e DISPLAY=$DISPLAY \
+  --privileged \
+  pinto0309/mtomo:tf2.4.1_torch1.7.1_openvino2021.3.394
+```
+
+### 3-2. Docker Build
 ```
 $ git clone https://github.com/PINTO0309/mtomo.git && cd mtomo
 $ docker build -t {IMAGE_NAME}:{TAG} .
 ```
 
-### 3-2. Docker Run
+### 3-3. Docker Run
 ```
 $ xhost +local: && \
   docker run -it --rm \
