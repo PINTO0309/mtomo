@@ -9,7 +9,7 @@
 2. TensorFlow v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
 3. tflite_runtime v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
 4. edgetpu-compiler
-5. flatc
+5. flatc 1.12.0
 6. TensorRT cuda11.0-trt7.1.3.4-ga-20200617
 7. PyTorch 1.7.1+cu110
 8. TorchVision 0.8.2+cu110
