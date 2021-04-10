@@ -36,7 +36,7 @@ $ docker build -t {IMAGE_NAME}:{TAG} .
 
 ### 3-2. Docker Run
 ```
-$ xhost +local: \
+$ xhost +local: && \
   docker run -it --rm \
   -v `pwd`:/home/user/workdir \
   -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
