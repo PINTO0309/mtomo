@@ -1,5 +1,5 @@
 # mtomo
-`M`ultiple `t`ypes `o`f NN `m`odel `o`ptimization environments.
+**M**ultiple **t**ypes **o**f NN **m**odel **o**ptimization environments.
 
 ## 1. Environment
 1. Docker 20.10.5, build 55c4c88
