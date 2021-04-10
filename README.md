@@ -1,2 +1,2 @@
 # mtomo
-Multiple types of model optimization environments
+Multiple types of NN model optimization environments.
