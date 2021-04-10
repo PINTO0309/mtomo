@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
         python3-mock libpython3-dev libpython3-all-dev \
         g++ gcc cmake make pciutils cpio gosu wget \
         libgtk-3-dev libxtst-dev sudo apt-transport-https \
-        build-essential gnupg git xz-utils vim\
+        build-essential gnupg git xz-utils vim \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
