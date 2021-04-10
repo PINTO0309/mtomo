@@ -1,5 +1,5 @@
 # mtomo
-**M**ultiple **t**ypes **o**f NN **m**odel **o**ptimization environments.
+**M**ultiple **t**ypes **o**f NN **m**odel **o**ptimization environments. It is possible to directly access the host PC GUI and the camera to verify the operation.
 
 ## 1. Environment
 1. Docker 20.10.5, build 55c4c88
@@ -60,4 +60,17 @@ $ xhost +local: && \
     {IMAGE_NAME}:{TAG}
 ```
 
+## 4. Reference articles
+1. [openvino2tensorflow](https://github.com/PINTO0309/openvino2tensorflow.git)
+2. [tflite2tensorflow](https://github.com/PINTO0309/tflite2tensorflow.git)
+3. [tensorflow-onnx (a.k.a tf2onnx)](https://github.com/onnx/tensorflow-onnx.git)
+4. [tensorflowjs](https://pypi.org/project/tensorflowjs/)
+5. [coremltools](https://github.com/apple/coremltools.git)
+6. [OpenVINO](https://docs.openvinotoolkit.org/latest/openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html)
+7. [onnx](https://github.com/onnx/onnx.git)
+8. [onnx-simplifier](https://github.com/daquexian/onnx-simplifier.git)
+9. [TensorFLow](https://github.com/tensorflow/tensorflow.git)
+10. [PyTorch](https://github.com/pytorch/pytorch.git)
+11. [flatbuffers (a.k.a flatc)](https://google.github.io/flatbuffers/)
+12. [TensorRT](https://developer.nvidia.com/tensorrt)
 
