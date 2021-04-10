@@ -32,13 +32,13 @@
 ```
 $ xhost +local: && \
   docker run -it --rm \
-  --gpus all \
-  -v `pwd`:/home/user/workdir \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
-  --device /dev/video0:/dev/video0:mwr \
-  -e DISPLAY=$DISPLAY \
-  --privileged \
-  pinto0309/mtomo:tf2.4.1_torch1.7.1_openvino2021.3.394
+    --gpus all \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --device /dev/video0:/dev/video0:mwr \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    pinto0309/mtomo:tf2.4.1_torch1.7.1_openvino2021.3.394
 ```
 
 ### 3-2. Docker Build
@@ -51,13 +51,13 @@ $ docker build -t {IMAGE_NAME}:{TAG} .
 ```
 $ xhost +local: && \
   docker run -it --rm \
-  --gpus all \
-  -v `pwd`:/home/user/workdir \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
-  --device /dev/video0:/dev/video0:mwr \
-  -e DISPLAY=$DISPLAY \
-  --privileged \
-  {IMAGE_NAME}:{TAG}
+    --gpus all \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --device /dev/video0:/dev/video0:mwr \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    {IMAGE_NAME}:{TAG}
 ```
 
 
