@@ -38,6 +38,7 @@ $ docker build -t {IMAGE_NAME}:{TAG} .
 ```
 $ xhost +local: && \
   docker run -it --rm \
+  --gpus all \
   -v `pwd`:/home/user/workdir \
   -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
   --device /dev/video0:/dev/video0:mwr \
