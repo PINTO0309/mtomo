@@ -42,7 +42,7 @@ $ xhost +local: && \
     --device /dev/video0:/dev/video0:mwr \
     -e DISPLAY=$DISPLAY \
     --privileged \
-    pinto0309/mtomo:tf2.4.1_torch1.7.1_openvino2021.3.394
+    pinto0309/mtomo:ubuntu1804_tf2.4.1_torch1.7.1_openvino2021.3.394
 ```
 
 ### 3-2. Docker Build
