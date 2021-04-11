@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
         libva-wayland2 libva-glx2 intel-media-va-driver \
         libva-dev libmfx-dev libdrm-dev xorg xorg-dev \
         openbox libx11-dev libgl1-mesa-glx libgl1-mesa-dev \
+        libtbb2 libtbb-dev \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -90,6 +91,9 @@ RUN gdown --id 1GfpkEn_rnfYEYY_QzTTM2oiaCPlfbvex \
     && ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh \
     && rm -rf l_openvino_toolkit_p_${OPENVINOVER} \
     && echo 'source /opt/intel/openvino_2021/bin/setupvars.sh' >> .bashrc \
+    && echo '/opt/intel/openvino_2021/deployment_tools/ngraph/lib/' >> /etc/ld.so.conf \
+    && echo '/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64/' >> /etc/ld.so.conf \
+    && ldconfig \
     && pip cache purge \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
