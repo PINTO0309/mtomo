@@ -3,13 +3,13 @@
   <img src="https://user-images.githubusercontent.com/33194443/114279517-12f51b80-9a70-11eb-868d-a68620344ca1.png" />
 </p>
 
-**M**ultiple **t**ypes **o**f NN **m**odel **o**ptimization environments. It is possible to directly access the host PC GUI and the camera to verify the operation.
+**M**ultiple **t**ypes **o**f NN **m**odel **o**ptimization environments. It is possible to directly access the host PC GUI and the camera to verify the operation. And, Intel iHD GPU (iGPU) support.
 
 ## 1. Environment
 1. Docker 20.10.5, build 55c4c88
 
 ## 2. Model optimization environment to be built
-1. Ubuntu 18.04 x86_64
+1. Ubuntu 20.04 x86_64
 2. TensorFlow v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
 3. tflite_runtime v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
 4. edgetpu-compiler
@@ -28,8 +28,11 @@
 17. tflite2tensorflow
 18. onnxruntime
 19. onnx-simplifier
-20. gdown
-21. OpenCV 4.5.2-openvino
+20. MXNet
+21. gdown
+22. OpenCV 4.5.2-openvino
+23. Intel-Media-SDK
+24. Intel iHD GPU (iGPU) support
 
 ## 3. Usage
 ### 3-1. Docker Hub
@@ -40,9 +43,11 @@ $ xhost +local: && \
     -v `pwd`:/home/user/workdir \
     -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
     --device /dev/video0:/dev/video0:mwr \
+    --net=host \
+    -e LIBVA_DRIVER_NAME=iHD \
     -e DISPLAY=$DISPLAY \
     --privileged \
-    pinto0309/mtomo:tf2.4.1_torch1.7.1_openvino2021.3.394
+    pinto0309/mtomo:ubuntu2004_tf2.4.1_torch1.7.1_openvino2021.3.394
 ```
 
 ### 3-2. Docker Build
@@ -59,6 +64,8 @@ $ xhost +local: && \
     -v `pwd`:/home/user/workdir \
     -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
     --device /dev/video0:/dev/video0:mwr \
+    --net=host \
+    -e LIBVA_DRIVER_NAME=iHD \
     -e DISPLAY=$DISPLAY \
     --privileged \
     {IMAGE_NAME}:{TAG}
@@ -77,4 +84,6 @@ $ xhost +local: && \
 10. [PyTorch](https://github.com/pytorch/pytorch.git)
 11. [flatbuffers (a.k.a flatc)](https://google.github.io/flatbuffers/)
 12. [TensorRT](https://developer.nvidia.com/tensorrt)
+13. [Intel-Media-SDK/MediaSDK - Running on GPU under docker](https://github.com/Intel-Media-SDK/MediaSDK/wiki/Running-on-GPU-under-docker)
+14. [Intel-Media-SDK/MediaSDK - Intel media stack on Ubuntu](https://github.com/Intel-Media-SDK/MediaSDK/wiki/Intel-media-stack-on-Ubuntu)
 
