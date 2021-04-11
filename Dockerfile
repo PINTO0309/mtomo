@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG OSVER=ubuntu1804
@@ -24,6 +24,10 @@ RUN apt-get update && apt-get install -y \
         g++ gcc cmake make pciutils cpio gosu wget \
         libgtk-3-dev libxtst-dev sudo apt-transport-https \
         build-essential gnupg git xz-utils vim \
+        libmfx1 libmfx-tools libva-drm2 libva-x11-2 vainfo \
+        libva-wayland2 libva-glx2 intel-media-va-driver \
+        libva-dev libmfx-dev libdrm-dev xorg xorg-dev \
+        openbox libx11-dev libgl1-mesa-glx libgl1-mesa-dev \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -101,9 +105,11 @@ RUN gdown --id 1gsAOLzTxUTMV4vKXKay5z9rutjlmP2BM \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Custom TensorFlow (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
-RUN gdown --id 1gDdVPvoLPPNZsZlqOS4KKLhxu6flgDaO \
-    && pip install --force-reinstall tensorflow-${TENSORFLOWVER}-cp36-cp36m-linux_x86_64.whl \
-    && rm tensorflow-${TENSORFLOWVER}-cp36-cp36m-linux_x86_64.whl \
+RUN gdown --id 1P7MPF_05QUcb_jMkLazy8LxGUpNB9V-b \
+    && mv tensorflow-2.4.1-cp38-cp38-linux_x86_64.whl tensorflow-2.4.1-cp38-none-linux_x86_64.whl \
+    && pip install --force-reinstall tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
+    && rm tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
+    && pip install numpy==1.20.2 \
     && pip cache purge \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
