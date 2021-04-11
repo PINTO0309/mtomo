@@ -136,5 +136,7 @@ RUN echo "root:root" | chpasswd \
 USER ${username}
 RUN cd ${OPENVINOROOTDIR}/install_dependencies/ \
     && yes | sudo -E ./install_NEO_OCL_driver.sh \
-    && cd ${wkdir}
+    && cd ${wkdir} \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
 RUN sudo chown ${username}:${username} ${wkdir}
