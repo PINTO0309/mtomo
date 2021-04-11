@@ -5,6 +5,7 @@ ARG OSVER=ubuntu1804
 ARG TENSORFLOWVER=2.4.1
 ARG TENSORRTVER=cuda11.0-trt7.1.3.4-ga-20200617
 ARG OPENVINOVER=2021.3.394
+ARG OPENVINOROOTDIR=/opt/intel/openvino_2021
 ARG TORCHVER=1.7.1+cu110
 ARG TORCHVISIONVER=0.8.2+cu110
 ARG TORCHAUDIOVER=0.7.2
@@ -82,7 +83,7 @@ RUN gdown --id 1GfpkEn_rnfYEYY_QzTTM2oiaCPlfbvex \
     && l_openvino_toolkit_p_${OPENVINOVER}/install_openvino_dependencies.sh -y \
     && sed -i 's/decline/accept/g' l_openvino_toolkit_p_${OPENVINOVER}/silent.cfg \
     && l_openvino_toolkit_p_${OPENVINOVER}/install.sh --silent l_openvino_toolkit_p_${OPENVINOVER}/silent.cfg \
-    && source /opt/intel/openvino_2021/bin/setupvars.sh \
+    && source ${OPENVINOROOTDIR}/bin/setupvars.sh \
     && ${INTEL_OPENVINO_DIR}/install_dependencies/install_openvino_dependencies.sh \
     && sed -i 's/sudo -E //g' ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh \
     && sed -i 's/tensorflow/#tensorflow/g' ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/requirements.txt \
@@ -90,10 +91,9 @@ RUN gdown --id 1GfpkEn_rnfYEYY_QzTTM2oiaCPlfbvex \
     && sed -i 's/onnx/#onnx/g' ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/requirements.txt \
     && ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh \
     && rm -rf l_openvino_toolkit_p_${OPENVINOVER} \
-    && echo 'source /opt/intel/openvino_2021/bin/setupvars.sh' >> .bashrc \
-    && echo '/opt/intel/openvino_2021/deployment_tools/ngraph/lib/' >> /etc/ld.so.conf \
-    && echo '/opt/intel/openvino_2021/deployment_tools/inference_engine/lib/intel64/' >> /etc/ld.so.conf \
-    && ldconfig \
+    && echo "source ${OPENVINOROOTDIR}/bin/setupvars.sh" >> .bashrc \
+    && echo "${OPENVINOROOTDIR}/deployment_tools/ngraph/lib/" >> /etc/ld.so.conf \
+    && echo "${OPENVINOROOTDIR}/deployment_tools/inference_engine/lib/intel64/" >> /etc/ld.so.conf \
     && pip cache purge \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
@@ -133,5 +133,8 @@ RUN echo "root:root" | chpasswd \
     && echo "${username}:${username}" | chpasswd \
     && echo "%${username}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers.d/${username} \
     && chmod 0440 /etc/sudoers.d/${username}
-RUN chown ${username}:${username} ${wkdir}
 USER ${username}
+RUN cd ${OPENVINOROOTDIR}/install_dependencies/ \
+    && yes | sudo -E ./install_NEO_OCL_driver.sh \
+    && cd ${wkdir}
+RUN sudo chown ${username}:${username} ${wkdir}

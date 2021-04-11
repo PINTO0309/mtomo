@@ -45,6 +45,7 @@ $ xhost +local: && \
     --device /dev/video0:/dev/video0:mwr \
     --net=host \
     -e LIBVA_DRIVER_NAME=iHD \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
     -e DISPLAY=$DISPLAY \
     --privileged \
     pinto0309/mtomo:ubuntu2004_tf2.4.1_torch1.7.1_openvino2021.3.394
@@ -66,6 +67,7 @@ $ xhost +local: && \
     --device /dev/video0:/dev/video0:mwr \
     --net=host \
     -e LIBVA_DRIVER_NAME=iHD \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
     -e DISPLAY=$DISPLAY \
     --privileged \
     {IMAGE_NAME}:{TAG}
