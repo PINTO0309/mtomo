@@ -10,29 +10,31 @@
 
 ## 2. Model optimization environment to be built
 1. Ubuntu 20.04 x86_64
-2. TensorFlow v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
-3. tflite_runtime v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
-4. edgetpu-compiler
-5. flatc 1.12.0
-6. TensorRT cuda11.0-trt7.1.3.4-ga-20200617
-7. PyTorch 1.7.1+cu110
-8. TorchVision 0.8.2+cu110
-9. TorchAudio 0.7.2
-10. OpenVINO 2021.3.394
-11. tensorflowjs
-12. coremltools
-13. onnx
-14. tf2onnx
-15. tensorflow-datasets
-16. openvino2tensorflow
-17. tflite2tensorflow
-18. onnxruntime
-19. onnx-simplifier
-20. MXNet
-21. gdown
-22. OpenCV 4.5.2-openvino
-23. Intel-Media-SDK
-24. Intel iHD GPU (iGPU) support
+2. CUDA 11.0
+3. cuDNN 8.0
+4. TensorFlow v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
+5. tflite_runtime v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
+6. edgetpu-compiler
+7. flatc 1.12.0
+8. TensorRT cuda11.0-trt7.1.3.4-ga-20200617
+9. PyTorch 1.8.1+cu110
+10. TorchVision 0.9.1+cu110
+11. TorchAudio 0.8.1
+12. OpenVINO 2021.3.394
+13. tensorflowjs
+14. coremltools
+15. onnx
+16. tf2onnx
+17. tensorflow-datasets
+18. openvino2tensorflow
+19. tflite2tensorflow
+20. onnxruntime
+21. onnx-simplifier
+22. MXNet
+23. gdown
+24. OpenCV 4.5.2-openvino
+25. Intel-Media-SDK
+26. Intel iHD GPU (iGPU) support
 
 ## 3. Usage
 ### 3-1. Docker Hub
@@ -48,7 +50,7 @@ $ xhost +local: && \
     -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
     -e DISPLAY=$DISPLAY \
     --privileged \
-    pinto0309/mtomo:ubuntu2004_tf2.4.1_torch1.7.1_openvino2021.3.394
+    pinto0309/mtomo:ubuntu2004_tf2.4.1_torch1.8.1_openvino2021.3.394
 ```
 
 ### 3-2. Docker Build

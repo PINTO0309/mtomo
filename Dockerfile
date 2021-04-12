@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG OSVER=ubuntu1804
@@ -6,9 +6,12 @@ ARG TENSORFLOWVER=2.4.1
 ARG TENSORRTVER=cuda11.0-trt7.1.3.4-ga-20200617
 ARG OPENVINOVER=2021.3.394
 ARG OPENVINOROOTDIR=/opt/intel/openvino_2021
-ARG TORCHVER=1.7.1+cu110
-ARG TORCHVISIONVER=0.8.2+cu110
-ARG TORCHAUDIOVER=0.7.2
+# PyTorch==1.8.1+cu110
+# TorchVision==0.9.1+cu110
+# TorchAudio==0.8.1
+ARG TORCHVER=1.8.0a0+56b43f4
+ARG TORCHVISIONVER=0.9.0a0+8fb5838
+ARG TORCHAUDIOVER=0.8.0a0+e4e171a
 ARG wkdir=/home/user
 
 # dash -> bash
@@ -49,10 +52,6 @@ RUN pip3 install --upgrade pip \
     && pip install --upgrade onnx-simplifier \
     && pip install --upgrade gdown \
     && pip install --upgrade PyYAML \
-    && pip install torch==${TORCHVER} \
-                        torchvision==${TORCHVISIONVER} \
-                        torchaudio==${TORCHAUDIOVER} \
-                        -f https://download.pytorch.org/whl/torch_stable.html \
     && ldconfig \
     && pip cache purge \
     && apt clean \
@@ -105,6 +104,20 @@ RUN gdown --id 1gsAOLzTxUTMV4vKXKay5z9rutjlmP2BM \
     && apt-get update \
     && apt-get install uff-converter-tf graphsurgeon-tf \
     && rm nv-tensorrt-repo-${OSVER}-${TENSORRTVER}_1-1_amd64.deb \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Custom PyTorch
+RUN gdown --id 1L257ptjP1EnQCDEHwarrDCZw23n4S8rJ \
+    && pip install torch-${TORCHVER}-cp38-cp38-linux_x86_64.whl \
+    && rm torch-${TORCHVER}-cp38-cp38-linux_x86_64.whl \
+    && gdown --id 1B7dsmZYQdiMDWHuEMz-wCMEb-3yz-H9j \
+    && pip install torchvision-${TORCHVISIONVER}-cp38-cp38-linux_x86_64.whl \
+    && rm torchvision-${TORCHVISIONVER}-cp38-cp38-linux_x86_64.whl \
+    && gdown --id 1Y5ZOkRB0dN8fu9J6jrxSbvAm19wnO2v9 \
+    && pip install torchaudio-${TORCHAUDIOVER}-cp38-cp38-linux_x86_64.whl \
+    && rm torchaudio-${TORCHAUDIOVER}-cp38-cp38-linux_x86_64.whl \
+    && pip cache purge \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
