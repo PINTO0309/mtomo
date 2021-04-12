@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y \
         libva-wayland2 libva-glx2 intel-media-va-driver \
         libva-dev libmfx-dev libdrm-dev xorg xorg-dev \
         openbox libx11-dev libgl1-mesa-glx libgl1-mesa-dev \
-        libtbb2 libtbb-dev \
+        libtbb2 libtbb-dev clinfo \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -134,9 +134,19 @@ RUN echo "root:root" | chpasswd \
     && echo "%${username}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers.d/${username} \
     && chmod 0440 /etc/sudoers.d/${username}
 USER ${username}
+RUN sudo chown ${username}:${username} ${wkdir}
+
+# OpenCL settings - https://github.com/intel/compute-runtime/releases
 RUN cd ${OPENVINOROOTDIR}/install_dependencies/ \
     && yes | sudo -E ./install_NEO_OCL_driver.sh \
     && cd ${wkdir} \
+    && wget https://github.com/intel/compute-runtime/releases/download/21.14.19498/intel-gmmlib_20.4.1_amd64.deb \
+    && wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.6812/intel-igc-core_1.0.6812_amd64.deb \
+    && wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.6812/intel-igc-opencl_1.0.6812_amd64.deb \
+    && wget https://github.com/intel/compute-runtime/releases/download/21.14.19498/intel-opencl_21.14.19498_amd64.deb \
+    && wget https://github.com/intel/compute-runtime/releases/download/21.14.19498/intel-ocloc_21.14.19498_amd64.deb \
+    && wget https://github.com/intel/compute-runtime/releases/download/21.14.19498/intel-level-zero-gpu_1.0.19498_amd64.deb \
+    && sudo dpkg -i *.deb \
+    && rm *.deb \
     && sudo apt clean \
     && sudo rm -rf /var/lib/apt/lists/*
-RUN sudo chown ${username}:${username} ${wkdir}
