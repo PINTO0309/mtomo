@@ -38,6 +38,7 @@
 
 ## 3. Usage
 ### 3-1. Docker Hub
+https://hub.docker.com/repository/docker/pinto0309/mtomo/tags?page=1&ordering=last_updated
 ```
 $ xhost +local: && \
   docker run -it --rm \
