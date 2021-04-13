@@ -3,7 +3,7 @@
   <img src="https://user-images.githubusercontent.com/33194443/114279517-12f51b80-9a70-11eb-868d-a68620344ca1.png" />
 </p>
 
-**M**ultiple **t**ypes **o**f NN **m**odel **o**ptimization environments. It is possible to directly access the host PC GUI and the camera to verify the operation. And, Intel iHD GPU (iGPU) support.
+**M**ultiple **t**ypes **o**f NN **m**odel **o**ptimization environments. It is possible to directly access the host PC GUI and the camera to verify the operation. And, Intel iHD GPU (iGPU) support. NVIDIA GPU (dGPU) support.
 
 ## 1. Environment
 1. Docker 20.10.5, build 55c4c88
