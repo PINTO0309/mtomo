@@ -123,7 +123,7 @@ RUN gdown --id 1L257ptjP1EnQCDEHwarrDCZw23n4S8rJ \
 
 # Install Custom TensorFlow (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
 RUN gdown --id 1P7MPF_05QUcb_jMkLazy8LxGUpNB9V-b \
-    && mv tensorflow-2.4.1-cp38-cp38-linux_x86_64.whl tensorflow-2.4.1-cp38-none-linux_x86_64.whl \
+    && mv tensorflow-${TENSORFLOWVER}-cp38-cp38-linux_x86_64.whl tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && pip install --force-reinstall tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && rm tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && pip install numpy==1.20.2 \
