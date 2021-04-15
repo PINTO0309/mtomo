@@ -10,13 +10,13 @@
 
 ## 2. Model optimization environment to be built
 1. Ubuntu 20.04 x86_64
-2. CUDA 11.0
-3. cuDNN 8.0
-4. TensorFlow v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
-5. tflite_runtime v2.4.1 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
+2. CUDA 11.2
+3. cuDNN 8.1
+4. TensorFlow v2.5.0-rc0 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
+5. tflite_runtime v2.5.0-rc0 (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
 6. edgetpu-compiler
 7. flatc 1.12.0
-8. TensorRT cuda11.0-trt7.1.3.4-ga-20200617
+8. TensorRT cuda11.1-trt7.2.3.4-ga-20210226
 9. PyTorch 1.8.1+cu110
 10. TorchVision 0.9.1+cu110
 11. TorchAudio 0.8.1
@@ -51,7 +51,7 @@ $ xhost +local: && \
     -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
     -e DISPLAY=$DISPLAY \
     --privileged \
-    pinto0309/mtomo:ubuntu2004_tf2.4.1_torch1.8.1_openvino2021.3.394
+    pinto0309/mtomo:ubuntu2004_tf2.5.0-rc0_torch1.8.1_openvino2021.3.394
 ```
 
 ### 3-2. Docker Build

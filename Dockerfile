@@ -1,9 +1,9 @@
-FROM nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG OSVER=ubuntu1804
-ARG TENSORFLOWVER=2.4.1
-ARG TENSORRTVER=cuda11.0-trt7.1.3.4-ga-20200617
+ARG TENSORFLOWVER=2.5.0rc0
+ARG TENSORRTVER=cuda11.1-trt7.2.3.4-ga-20210226
 ARG OPENVINOVER=2021.3.394
 ARG OPENVINOROOTDIR=/opt/intel/openvino_2021
 # PyTorch==1.8.1+cu110
@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
         libva-wayland2 libva-glx2 intel-media-va-driver \
         libva-dev libmfx-dev libdrm-dev xorg xorg-dev \
         openbox libx11-dev libgl1-mesa-glx libgl1-mesa-dev \
-        libtbb2 libtbb-dev clinfo \
+        libtbb2 libtbb-dev clinfo since apt-utils \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -58,10 +58,10 @@ RUN pip3 install --upgrade pip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install custom tflite_runtime, flatc, edgetpu-compiler
-RUN gdown --id 1BDUSgDqdLz1AAdz-TdJCLs85cex4f3S2 \
-    && chmod +x tflite_runtime-${TENSORFLOWVER}-py3-none-any.whl \
-    && pip install tflite_runtime-${TENSORFLOWVER}-py3-none-any.whl \
-    && rm tflite_runtime-${TENSORFLOWVER}-py3-none-any.whl \
+RUN gdown --id 1iHvLv3pN9WEA-LkokXA_LthhmjgZc0Xh \
+    && chmod +x tflite_runtime-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
+    && pip install tflite_runtime-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
+    && rm tflite_runtime-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && gdown --id 1yOJ_F3IYAo2SlThyRNDoXuxADuM3XdGz \
     && tar -zxvf flatc.tar.gz \
     && chmod +x flatc \
@@ -71,7 +71,6 @@ RUN gdown --id 1BDUSgDqdLz1AAdz-TdJCLs85cex4f3S2 \
     && echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list \
     && apt-get update \
     && apt-get install edgetpu-compiler \
-    && pip cache purge \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -98,9 +97,9 @@ RUN gdown --id 1GfpkEn_rnfYEYY_QzTTM2oiaCPlfbvex \
     && rm -rf /var/lib/apt/lists/*
 
 # Install TensorRT additional package
-RUN gdown --id 1gsAOLzTxUTMV4vKXKay5z9rutjlmP2BM \
+RUN gdown --id 1nZ8RQU12Zv6JA4726we1Sf3Trcbyt0-W \
     && dpkg -i nv-tensorrt-repo-${OSVER}-${TENSORRTVER}_1-1_amd64.deb \
-    && apt-key add /var/nv-tensorrt-repo-${TENSORRTVER}/7fa2af80.pub \
+    && apt-key add /var/nv-tensorrt-repo-${OSVER}-${TENSORRTVER}/7fa2af80.pub \
     && apt-get update \
     && apt-get install uff-converter-tf graphsurgeon-tf \
     && rm nv-tensorrt-repo-${OSVER}-${TENSORRTVER}_1-1_amd64.deb \
@@ -122,7 +121,7 @@ RUN gdown --id 1L257ptjP1EnQCDEHwarrDCZw23n4S8rJ \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Custom TensorFlow (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
-RUN gdown --id 1P7MPF_05QUcb_jMkLazy8LxGUpNB9V-b \
+RUN gdown --id 1r6lubjqU4ApafzZRExYJNXtfDeG0fQoQ \
     && mv tensorflow-${TENSORFLOWVER}-cp38-cp38-linux_x86_64.whl tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && pip install --force-reinstall tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && rm tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
