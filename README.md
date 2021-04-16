@@ -17,8 +17,8 @@
 6. edgetpu-compiler
 7. flatc 1.12.0
 8. TensorRT cuda11.1-trt7.2.3.4-ga-20210226
-9. PyTorch 1.8.1+cu110
-10. TorchVision 0.9.1+cu110
+9. PyTorch 1.8.1+cu112
+10. TorchVision 0.9.1+cu112
 11. TorchAudio 0.8.1
 12. OpenVINO 2021.3.394
 13. tensorflowjs
