@@ -2,7 +2,7 @@ FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG OSVER=ubuntu1804
-ARG TENSORFLOWVER=2.5.0rc0
+ARG TENSORFLOWVER=2.5.0rc1
 ARG TENSORRTVER=cuda11.1-trt7.2.3.4-ga-20210226
 ARG OPENVINOVER=2021.3.394
 ARG OPENVINOROOTDIR=/opt/intel/openvino_2021
@@ -58,7 +58,7 @@ RUN pip3 install --upgrade pip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install custom tflite_runtime, flatc, edgetpu-compiler
-RUN gdown --id 1iHvLv3pN9WEA-LkokXA_LthhmjgZc0Xh \
+RUN gdown --id 172QlW8MGzDMDgMkDOGFix54oFZ6FFIe- \
     && chmod +x tflite_runtime-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && pip install tflite_runtime-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && rm tflite_runtime-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
@@ -121,7 +121,7 @@ RUN gdown --id 1L257ptjP1EnQCDEHwarrDCZw23n4S8rJ \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Custom TensorFlow (MediaPipe Custom OP, FlexDelegate, XNNPACK enabled)
-RUN gdown --id 1r6lubjqU4ApafzZRExYJNXtfDeG0fQoQ \
+RUN gdown --id 1fDris22yvzJpJmdc-AJvlIpYsW0YmLDH \
     && mv tensorflow-${TENSORFLOWVER}-cp38-cp38-linux_x86_64.whl tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && pip install --force-reinstall tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
     && rm tensorflow-${TENSORFLOWVER}-cp38-none-linux_x86_64.whl \
