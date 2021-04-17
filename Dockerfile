@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y \
         libva-dev libmfx-dev libdrm-dev xorg xorg-dev \
         openbox libx11-dev libgl1-mesa-glx libgl1-mesa-dev \
         libtbb2 libtbb-dev clinfo since apt-utils \
-        libopenmpi-dev libopenmpi3 \
+        libopenmpi-dev libopenmpi3 libopenblas-dev libcusolver10 \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
